@@ -19,6 +19,8 @@ const Calculator = React.createClass({
   onInputChange: function(e) {
     const grams = e.target.value;
     this.renderGramsToPercentage(grams || 0);
+    this.props.onGramsChanged(grams);
+
     this.setState({
       grams
     });
@@ -64,6 +66,12 @@ const Share = React.createClass({
     }
   },
 
+  getDefaultProps: function() {
+    return {
+      grams: 0
+    };
+  },
+
   onBrandChanged(e) {
     this.setState({
       brand: e.target.value
@@ -84,8 +92,10 @@ const Share = React.createClass({
 
   onShareClicked(e) {
     const {brand, per, units} = this.state;
+    const {grams} = this.props;
+
     console.log(`${brand} ${per} ${units}`);
-    axios.get(`/api/v1/save/${brand}/${per}/${units}`).then(response => {
+    axios.get(`/api/v1/save/${brand}/${grams}/${per}/${units}`).then(response => {
       this.setState({
         submitted: true
       });
@@ -131,6 +141,7 @@ const Share = React.createClass({
           placeholder="units"
           className="smaller"
         />
+        {this.state.grams}
 
         <div id="example">
           <strong>Eg:</strong>&nbsp;
@@ -148,6 +159,18 @@ const Share = React.createClass({
 });
 
 const Wrapper = React.createClass({
+  getInitialState: function() {
+    return {
+      grams: 0,
+    };
+  },
+
+  handleGramsChanged: function(grams) {
+    this.setState({
+      grams
+    });
+  },
+
   render: function() {
     return (
       <div>
@@ -160,11 +183,11 @@ const Wrapper = React.createClass({
         </div>
 
         <div className="calculator">
-          <Calculator />
+          <Calculator onGramsChanged={this.handleGramsChanged}/>
         </div>
 
         <div className="share">
-          <Share />
+          <Share grams={this.state.grams} />
         </div>
       </div>);
   }
