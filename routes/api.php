@@ -35,15 +35,16 @@ $app->group(['prefix' => 'api/v1'], function () use ($app) {
     ]);
   });
 
-  $app->get('/save/{brand}/{per}/{unit}', function ($brand, $per, $unit) {
+  $app->get('/save/{brand}/{grams}/{per}/{unit}', function ($brand, $grams, $per, $unit) {
     // TODO: maybe only accept GET from origins from my own site...
 
-    DB::insert('insert into sugarsins (brand, per, unit) values (?, ?, ?)',
+    DB::insert('insert into sugarsins (brand, grams, per, unit) values (?, ?, ?, ?)',
     [ $brand,
+      $grams,
       $per,
       $unit
     ]);
-    
+
     return response()->json([
       "information" => [
         "brand" => $brand,
