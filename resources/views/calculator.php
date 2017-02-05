@@ -25,7 +25,15 @@
     <script type="text/babel" src="/js/calculator.js"></script>
 
     <div id="attribution">
-      Copyright &copy; 2017, <a href="https://hotdang.ca/">Hot Dang Interactive</a>
+      <p>
+        Created in Canada by <a href="mailto:james@hotdang.ca">James Robert Perih</a>. Based on numbers from the World Health Organization, and the American Heart Association.
+      </p>
+      <p>
+      </p>
+
+      <p>
+        Copyright &copy; 2017, <a href="https://hotdang.ca/" target="_blank">Hot Dang Interactive</a>
+      </p>
     </div>
   </body>
 </html>
