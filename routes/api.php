@@ -53,4 +53,9 @@ $app->group(['prefix' => 'api/v1'], function () use ($app) {
       ]
     ]);
   });
+
+  $app->get('/sugarsins', function() {
+    $results = DB::select("SELECT * FROM sugarsins");
+    return response()->json($results);
+  });
 });
